@@ -1,0 +1,31 @@
+<div id="detailsInfo" class="row mt-5 mx-sm-5 mx-1">
+    <div class="d-flex flex-column">
+        <button class="info-btn btn d-flex align-items-baseline pt-1 shadow-none" aria-expanded="false" data-toggle="collapse" data-target="#detailsContent">
+            <i class="collapse-first fa fa-plus" aria-hidden="true"></i>
+            <i class="collapse-second fa fa-minus" aria-hidden="true"></i>
+            <h5 class="info-text pl-2">${Resource.msg('label.description', 'product', null)}</h5>
+        </button>
+
+        <isif condition="${product.deliveryInfo}"> 
+            <button class="info-btn btn d-flex align-items-baseline shadow-none" aria-expanded="false" data-toggle="collapse" data-target="#deliveryContent">
+                <i class="collapse-first fa fa-plus" aria-hidden="true"></i>
+                <i class="collapse-second fa fa-minus" aria-hidden="true"></i>
+                <h5 class="info-text pl-2">${Resource.msg('label.delivery', 'product', null)}</h5>
+            </button>
+        </isif>
+    </div>
+
+    <div class="col-md-9 col-12 pt-1">
+        <hr class="d-sm-none">
+
+            <div class="collapse mb-5" id="detailsContent" data-parent="#detailsInfo">
+                <isprint value="${product.longDescription}" encoding="off" />
+            </div>
+
+        <isif condition="${product.deliveryInfo}"> 
+            <div class="collapse mb-5" id="deliveryContent" data-parent="#detailsInfo">
+                <isprint value="${product.deliveryInfo}" encoding="off" />
+            </div>
+        </isif>
+    </div>
+</div>

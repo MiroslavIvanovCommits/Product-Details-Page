@@ -1,0 +1,53 @@
+@import "../variables";
+@import "bootstrap/scss/mixins/breakpoints";
+@import "base/product/detail";
+
+// Select size buttons
+.select-buttons {
+    max-width: 100%;
+    height: 3rem;
+    overflow: visible;
+
+    option {
+        background-color: var(--color-grey2);
+        cursor: pointer;
+
+        &:checked {
+            background-color: var(--color-grey3);
+        }
+    }
+}
+
+// Quantity section
+.quantity-btn {
+    scale: 0.8;
+}
+
+.count-select {
+    appearance: none;
+
+    &::-moz-focus-inner {
+        border: 0;
+    }
+
+    & option {
+        display: none;
+    }
+}
+
+// Flip tag icon
+.fa-tag {
+    transform: rotateY(180deg);
+}
+
+// Dropdown
+.info-btn {
+    &[aria-expanded=true] .collapse-first,
+    &[aria-expanded=false] .collapse-second {
+      display: none;
+    }
+  
+    &[aria-expanded=true] .info-text {
+      color: var(--color-primary);
+    }
+}

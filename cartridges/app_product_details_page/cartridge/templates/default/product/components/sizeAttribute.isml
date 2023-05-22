@@ -1,0 +1,12 @@
+<select class="select-buttons border-0 select-${attr.id}" multiple>
+    <ul>
+        <isloop items="${attr.values}" var="attrValue">
+            <li>
+                <option class="d-inline-block text-center rounded bg-muted text-dark float-left py-1 px-3 mx-1 row"
+                    value="${attrValue.url}" data-attr-value="${attrValue.value}" ${!attrValue.selectable ? 'disabled' : ''} ${attrValue.selected ? 'selected' : ''}>
+                    ${attrValue.displayValue}
+                </option>
+            </li>
+        </isloop>
+    </ul>
+</select>

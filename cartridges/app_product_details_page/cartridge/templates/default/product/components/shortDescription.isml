@@ -1,0 +1,15 @@
+<isif condition="${product.shortDescription.length > 85}">
+    <p class="js-collapsed-description col-sm-12 col-md-8 col-lg-9">
+        ${product.shortDescription.slice(0, 85)}${Resource.msg('description.limit', 'product', null)}
+        <button class="js-reveal-details-btn border-0 bg-transparent text-primary text-decoration-underline font-weight-bold">${Resource.msg('description.viewmore', 'product', null)}</button>
+    </p>
+
+    <p class="js-revealed-description col-sm-12 col-md-8 col-lg-9 d-none">
+        ${product.shortDescription}
+    </p>
+
+<iselse/>
+    <p>
+        <isprint value="${product.shortDescription}" encoding="off" />
+    </p>
+</isif>

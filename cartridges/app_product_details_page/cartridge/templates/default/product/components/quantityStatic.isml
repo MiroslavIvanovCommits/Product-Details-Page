@@ -1,0 +1,6 @@
+<div class="d-flex justify-content-between">
+    <h5 class="font-weight-bold">${Resource.msg('label.quantity', 'common', null)}</h5>
+    <h5 class="quantity non-input-label" data-quantity="${product.selectedQuantity}">
+        ${parseInt(product.selectedQuantity, 10).toString()}
+    </h5>
+</div>

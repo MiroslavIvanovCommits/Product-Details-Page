@@ -1,0 +1,179 @@
+<isdecorate template="common/layout/page">
+
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets');
+        assets.addJs('/js/productDetail.js');
+        assets.addCss('/css/index.css');
+    </isscript>
+
+    <isset name="product" value="${pdict.product}" scope="page" />
+    <isset name="isQuickView" value="${false}" scope="page" />
+    <isset name="isProductSet" value="${pdict.product.productType === 'set'}" scope="page" />
+    <isobject object="${product.raw}" view="detail" />
+    <div class="container product-detail product-wrapper" data-pid="${product.id}">
+
+        <!--Breadcrumbs-->
+        <div class="row mb-4">
+            <div class="product-breadcrumb col hidden-sm-down">
+                <isinclude template="components/breadcrumbs/pageBreadcrumbs" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <!-- Product Name -->
+                <div class="row">
+                    <div class="d-md-none col-sm-12">
+                        <h1 class="product-name">${product.productName}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Product Images Carousel -->
+            <isinclude template="product/components/imageCarousel" />
+
+            <div class="col-12 col-sm-6">
+                <!-- Product Name -->
+                <div class="row">
+                    <div class="col">
+                        <h1 class="product-name hidden-sm-down">${product.productName}</h1>
+                    </div>
+                </div>
+
+                <!-- Product Prices -->
+                <div class="row">
+                    <div class="col-12">
+                        <isset name="price" value="${product.price}" scope="page" />
+                        <isinclude template="product/components/pricing/main" />
+                    </div>
+                </div>
+
+                <!-- Product Rating -->
+                <div class="row">
+                    <div class="col text-info">
+                        <isinclude template="product/components/pidRating" />
+                    </div>
+                </div>
+
+                <div class="grey-line">
+                    <hr />
+                </div>
+
+                <!-- Product Description -->
+                <div class="row">
+                    <div class="col-12">
+                        <isinclude template="product/components/shortDescription" />
+                    </div>
+                </div>
+
+                <div class="grey-line">
+                    <hr />
+                </div>
+
+                <div class="attributes p-0">
+                    <!-- Attributes and Quantity -->
+                    <isinclude template="product/components/mainAttributes" />
+
+                    <isset name="isBundle" value="${false}" scope="page" />
+                    <isset name="loopState" value="${{
+                                                   count: 1}}" scope="page" />
+                    <isloop items="${product.variationAttributes}" var="attr" status="attributeStatus">
+                        <div class="row" data-attr="${attr.id}">
+                            <div class="col-8">
+                                <isinclude template="product/components/variationAttribute" />
+                            </div>
+
+                            <!-- Size Attribute -->
+                            <isif condition="${attr.id == 'size'}">
+                                <div class="col-12 mb-1">
+                                    <div class="row mb-1">
+                                        <h5 class="col font-weight-bold">${Resource.msg("label.size", "product", null)}
+                                        </h5>
+
+                                        <!-- Size Chart -->
+                                        <isif condition="${product.variationAttributes && product.sizeChartId}">
+                                            <div class="col text-right">
+                                                <isinclude template="product/components/sizeChart" />
+                                            </div>
+                                        </isif>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mb-1">
+                                    <isinclude template="product/components/sizeAttribute" />
+
+                                    <div class="grey-line">
+                                        <hr />
+                                    </div>
+                                </div>
+                            </isif>
+
+                            <!-- Quantity Custom Element -->
+                            <isif condition="${attributeStatus.last && !isBundle}">
+                                <div class="attribute quantity col-12 d-flex justify-content-between align-items-center">
+                                    <isinclude template="product/components/quantity" />
+                                </div>
+                            </isif>
+                        </div>
+                    </isloop>
+
+                    <isif condition="${!product.variationAttributes}">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="simple-quantity">
+                                    <isinclude template="product/components/quantity" />
+                                </div>
+                            </div>
+                        </div>
+                    </isif>
+
+                    <div class="product-options">
+                        <isif condition="${product.options && product.options.length > 0}">
+                            <isinclude template="product/components/options" />
+                        </isif>
+                    </div>
+
+                    <!-- Size Chart -->
+                    <isif condition="${product.variationAttributes && product.sizeChartId}">
+                        <div class="row">
+                            <div class="size-chart col-12">
+                                <isinclude template="product/components/sizeChart" />
+                            </div>
+                        </div>
+                    </isif>
+
+                    <!-- Product Availability -->
+                    <isinclude template="product/components/productAvailability" />
+
+                    <!-- Applicable Promotions -->
+                    <div class="row">
+                        <div class="col-12 promotions">
+                            <isinclude template="product/components/promotions" />
+                        </div>
+                    </div>
+
+                    <!-- Add to Bag -->
+                    <div class="grey-line">
+                        <hr />
+                    </div>
+
+                    <isinclude template="product/components/addToCartProduct" />
+
+                    <!-- Promotional Message Asset -->
+                    <isprint value="${pdict.specialOffers.custom.body}" encoding="off" />
+                </div>
+            </div>
+        </div>
+
+        <isset name="loopState" value="${{
+                                       count: 1}}" scope="page" />
+        <isinclude template="product/components/detailsAndDelivery" />
+    </div>
+    
+    <!-- Product Recommendations -->
+    <isinclude template="product/components/carouselReccomendation" />
+
+    </isobject>
+</isdecorate>

@@ -1,0 +1,105 @@
+<div class="container product-detail bundle-item" data-pid="${product.id}">
+    <div class="row">
+        <div class="col-12">
+            <!---Breadcrumbs--->
+            <div class="product-breadcrumb d-md-none">
+                <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+            </div>
+
+            <!-- Product Name -->
+            <div class="row">
+                <div class="d-md-none col-sm-12">
+                    <h1 class="product-name">${product.productName}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Product Images Carousel -->
+        <isinclude template="product/components/imageCarousel" />
+
+        <div class="col-12 col-sm-6">
+            <!-- Product Name -->
+            <div class="row">
+                <div class="col">
+                    <h1 class="product-name hidden-sm-down">${product.productName}</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col text-info ml-2">
+                    <isinclude template="product/components/pidRating" />
+                </div>
+            </div>
+
+            <div class="grey-line">
+                <hr />
+            </div>
+
+            <!-- Product Description -->
+            <div class="row">
+                <div class="col-12">
+                    <isinclude template="product/components/shortDescription" />
+                </div>
+            </div>
+
+            <div class="grey-line">
+                <hr />
+            </div>
+
+            <div class="attributes">
+                <!-- Attributes and Quantity -->
+                <isinclude template="product/components/mainAttributes" />
+
+                <isloop items="${product.variationAttributes}" var="attr" status="attributeStatus">
+                    <div class="row" data-attr="${attr.id}">
+                        <div class="col-8">
+                            <isinclude template="product/components/variationAttribute" />
+                        </div>
+
+                        <!-- Size Attribute -->
+                        <isif condition="${attr.id == 'size'}">
+                            <div class="col-12 mb-1">
+                                <div class="row mb-1">
+                                    <h5 class="col font-weight-bold">${Resource.msg("label.size", "product", null)}
+                                    </h5>
+
+                                    <!-- Size Chart -->
+                                    <isif condition="${product.variationAttributes && product.sizeChartId}">
+                                        <div class="col text-right">
+                                            <isinclude template="product/components/sizeChart" />
+                                        </div>
+                                    </isif>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mb-1">
+                                <isinclude template="product/components/sizeAttribute" />
+
+                                <div class="grey-line">
+                                    <hr />
+                                </div>
+                            </div>
+                        </isif>
+                    </div>
+                </isloop>
+
+                <!-- Product Availability -->
+                <isinclude template="product/components/productAvailability" />
+
+                <div class="row">
+                    <div class="col-12">
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <isinclude template="product/components/quantityStatic">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

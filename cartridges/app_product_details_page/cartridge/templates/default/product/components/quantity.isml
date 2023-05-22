@@ -1,0 +1,21 @@
+<h5 class="font-weight-bold">${Resource.msg('label.quantity', 'common', null)}</h5>
+
+<div class="d-flex">
+    <button class="js-quantity-remove btn border-secondary rounded-circle quantity-btn"><i
+            class="fa fa-minus text-secondary" aria-hidden="true"></i>
+    </button>
+
+    <select class="js-quantity-select quantity-select count-select bg-transparent border-0 text-center overflow-hidden">
+        <isloop items="${product.quantities}" var="quantity">
+            <option value="${quantity.value}" <isif condition="${product.productType !== 'bundle'}">
+                data-url="${quantity.url}"</isif>
+                ${quantity.selected ? 'selected' : ''}>
+                ${quantity.value}
+            </option>
+        </isloop>
+    </select>
+
+    <button class="js-quantity-add btn border-secondary rounded-circle quantity-btn"><i class="fa fa-plus text-primary"
+            aria-hidden="true"></i>
+    </button>
+</div>
